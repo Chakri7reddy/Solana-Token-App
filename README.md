@@ -1,46 +1,149 @@
-# Getting Started with Create React App
+# Solana Token App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Solana Logo](https://solana.com/src/img/branding/solanaLogoMark.svg)
 
-## Available Scripts
+## Overview
+A modern web application for interacting with the Solana blockchain. Create, mint, and manage SPL tokens with ease through an intuitive interface.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### Wallet Integration
+- 🔌 Connect with Phantom, Solflare, and other Solana wallets
+- 📜 View wallet address and transaction history
+- 🛑 Easy wallet disconnection
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Token Management
+- 🪙 Create custom SPL tokens with metadata
+- 🏗️ Mint tokens to your wallet
+- 💸 Send tokens to any Solana address
+- 📊 Track token balances in real-time
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### User Experience
+- 🎨 Clean, modern interface
+- 📱 Fully responsive design
+- 🔔 Transaction notifications
+- 🚦 Error handling and validation
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Component       | Technology                          |
+|-----------------|-------------------------------------|
+| Framework       | Next.js                             |
+| UI Library      | React.js                            |
+| Styling         | Tailwind CSS                        |
+| Blockchain      | Solana Web3.js                      |
+| Token Standard  | SPL Token Program                   |
+| Wallets         | Phantom, Solflare, Backpack         |
+| Deployment      | Vercel                              |
 
-### `npm run build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
+- Node.js v16 or later
+- npm or yarn
+- Solana wallet extension (Phantom recommended)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
+```bash
+## Clone the Repository
+```sh
+git clone https://github.com/AKSHAT-ARORA03/Solana-Token-App.git
+cd Solana-Token-App
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Install Dependencies
+```sh
+npm install
+```
 
-### `npm run eject`
+## Start Development Server
+```sh
+npm run dev
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The app will be running at [http://localhost:3000](http://localhost:3000)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Configuration
+Create a `.env.local` file in the root directory with your configuration:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+NEXT_PUBLIC_SOLANA_NETWORK=devnet
+NEXT_PUBLIC_RPC_ENDPOINT=https://api.devnet.solana.com
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Deployment
+### Vercel
+Install Vercel CLI:
+```sh
+npm install -g vercel
+```
 
-## Learn More
+Deploy:
+```sh
+vercel --prod
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Usage
+### Connect Your Wallet
+Use the button in the header to connect your wallet.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Create a New Token
+1. Navigate to "Create Token"
+2. Enter token details (name, symbol, decimals)
+3. Click "Create"
+
+### Mint Tokens
+1. Go to "My Tokens"
+2. Select your token
+3. Enter amount and click "Mint"
+
+### Send Tokens
+1. Select "Send Tokens"
+2. Enter recipient address and amount
+3. Confirm transaction
+
+## Screenshots
+- Dashboard
+- Token Creation
+- Transaction History
+
+## Troubleshooting
+### Wallet Connection Issues:
+- Ensure your wallet extension is installed and unlocked
+- Refresh the page and try again
+- Check console for errors (`F12` in Chrome)
+
+### Transaction Failures:
+- Verify you have enough SOL for gas fees
+- Check network connection
+- Ensure you're on the correct network (Devnet)
+
+## Contributing
+1. Fork the repository
+2. Create a feature branch:
+   ```sh
+   git checkout -b feature/your-feature
+   ```
+3. Commit your changes:
+   ```sh
+   git commit -m 'Add some feature'
+   ```
+4. Push to the branch:
+   ```sh
+   git push origin feature/your-feature
+   ```
+5. Open a Pull Request
+
+## License
+MIT License - See `LICENSE` for details.
+
+## Support
+For support, please:
+- Open an issue
+- Join our Discord server
+- Email: akshataroa1299@gmail.com
+
+## Acknowledgements
+- Solana Labs for the amazing blockchain
+- Phantom team for wallet integration
+- The Web3 community for inspiration
