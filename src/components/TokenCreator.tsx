@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import * as web3 from '@solana/web3.js';
-import * as splToken from '@solana/spl-token';
+import React, { useState } from "react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import * as web3 from "@solana/web3.js";
+import * as splToken from "@solana/spl-token";
 
 const TokenCreator: React.FC = () => {
   const { connection } = useConnection();
@@ -14,7 +14,7 @@ const TokenCreator: React.FC = () => {
 
   const createToken = async () => {
     if (!publicKey) {
-      setError('❌ Wallet not connected');
+      setError("❌ Wallet not connected");
       return;
     }
 
@@ -25,7 +25,12 @@ const TokenCreator: React.FC = () => {
       const mint = web3.Keypair.generate();
       const transaction = new web3.Transaction();
 
-      const mintRent = await connection.getMinimumBalanceForRentExemption(splToken.MINT_SIZE);
+      // Get rent exemption balance
+      const mintRent = await connection.getMinimumBalanceForRentExemption(
+        splToken.MINT_SIZE
+      );
+
+      // Create account and initialize mint instruction
       transaction.add(
         web3.SystemProgram.createAccount({
           fromPubkey: publicKey,
@@ -36,20 +41,27 @@ const TokenCreator: React.FC = () => {
         }),
         splToken.createInitializeMintInstruction(
           mint.publicKey,
-          6, // Decimals
+          6, // Decimals, make sure to check this value
           publicKey, // Mint authority
           publicKey, // Freeze authority
           splToken.TOKEN_PROGRAM_ID
         )
       );
 
-      const signature = await sendTransaction(transaction, connection, { signers: [mint] });
-      await connection.confirmTransaction(signature, 'confirmed');
-      
+      // Send transaction
+      const signature = await sendTransaction(transaction, connection, {
+        signers: [mint],
+      });
+      await connection.confirmTransaction(signature, "confirmed");
+
       setTokenMint(mint.publicKey.toBase58());
       setTransactionSig(signature);
     } catch (err) {
-      setError(`❌ ${(err as Error).message}`);
+      setError(
+        `❌ ${
+          (err as Error).message || "An error occurred during token creation"
+        }`
+      );
     } finally {
       setLoading(false);
     }
@@ -67,22 +79,34 @@ const TokenCreator: React.FC = () => {
     <div className="card token-creator-card">
       <h2 className="token-title">🛠 Create Your Token</h2>
 
-      <button className="primary-button create-btn" onClick={createToken} disabled={loading}>
-        {loading ? '⏳ Creating...' : '🪙 Create New Token'}
+      <button
+        className="primary-button create-btn"
+        onClick={createToken}
+        disabled={loading}
+      >
+        {loading ? "⏳ Creating..." : "🪙 Create New Token"}
       </button>
 
       {tokenMint && (
         <div className="success-message">
-          <p><strong>✅ Token Mint Address:</strong> {tokenMint.slice(0, 8)}...{tokenMint.slice(-8)}</p>
+          <p>
+            <strong>✅ Token Mint Address:</strong> {tokenMint.slice(0, 8)}...
+            {tokenMint.slice(-8)}
+          </p>
           <button className="copy-button" onClick={copyToClipboard}>
-            📋 {copySuccess ? 'Copied!' : 'Copy'}
+            📋 {copySuccess ? "Copied!" : "Copy"}
           </button>
         </div>
       )}
 
       {transactionSig && (
         <p className="tx-link">
-          🔗 <a href={`https://explorer.solana.com/tx/${transactionSig}?cluster=devnet`} target="_blank" rel="noopener noreferrer">
+          🔗{" "}
+          <a
+            href={`https://explorer.solana.com/tx/${transactionSig}?cluster=devnet`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             View Transaction
           </a>
         </p>

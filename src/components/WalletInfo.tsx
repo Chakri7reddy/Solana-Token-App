@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import * as web3 from '@solana/web3.js';
 import * as splToken from '@solana/spl-token';
@@ -8,13 +8,14 @@ import { showSuccess, showError } from '../utils/notifications';
 const WalletInfo: React.FC = () => {
   const { connection } = useConnection();
   const { publicKey, disconnect } = useWallet();
+
   const [balance, setBalance] = useState<number | null>(null);
   const [tokenBalances, setTokenBalances] = useState<{ mint: string; amount: number }[]>([]);
   const [transactions, setTransactions] = useState<{ sig: string; time: string }[]>([]);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  // Fetch wallet balances and transactions
-  const fetchWalletInfo = async () => {
+  // ✅ Wrapped in useCallback to avoid ESLint missing dependency warning
+  const fetchWalletInfo = useCallback(async () => {
     if (!publicKey) return;
 
     try {
@@ -44,23 +45,26 @@ const WalletInfo: React.FC = () => {
         }))
       );
     } catch (err) {
+      console.error(err);
       showError('Failed to fetch wallet details');
     }
-  };
+  }, [publicKey, connection]);
 
+  // Fetch wallet info initially and at intervals
   useEffect(() => {
     if (publicKey) {
       fetchWalletInfo();
       const interval = setInterval(fetchWalletInfo, 10000); // Refresh every 10 sec
       return () => clearInterval(interval);
     }
-  }, [publicKey, connection]);
+  }, [publicKey, connection, fetchWalletInfo]);
 
+  // Listen for token transfers
   useEffect(() => {
     if (publicKey) {
       listenForTokenTransfers(connection, publicKey, fetchWalletInfo);
     }
-  }, [publicKey, connection]);
+  }, [publicKey, connection, fetchWalletInfo]);
 
   const copyToClipboard = () => {
     if (publicKey) {
@@ -107,7 +111,11 @@ const WalletInfo: React.FC = () => {
           <ul className="tx-list">
             {transactions.map((tx, index) => (
               <li key={index}>
-                <a href={`https://explorer.solana.com/tx/${tx.sig}?cluster=devnet`} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={`https://explorer.solana.com/tx/${tx.sig}?cluster=devnet`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   🔗 Tx {index + 1}: {tx.sig.slice(0, 10)}... ({tx.time})
                 </a>
               </li>
@@ -116,7 +124,9 @@ const WalletInfo: React.FC = () => {
         </div>
       )}
 
-      <button className="secondary-button disconnect-btn" onClick={disconnect}>❌ Disconnect</button>
+      <button className="secondary-button disconnect-btn" onClick={disconnect}>
+        ❌ Disconnect
+      </button>
     </div>
   );
 };

@@ -16,3 +16,6 @@ export const listenForTokenTransfers = (connection: Connection, walletAddress: P
 
   tokenAccounts().catch(console.error);
 };
+// This function listens for token transfers related to the provided wallet address.
+// It fetches all token accounts owned by the wallet and sets up listeners for changes in their balances.
+// When a change is detected, it triggers the provided callback function to refresh wallet information.

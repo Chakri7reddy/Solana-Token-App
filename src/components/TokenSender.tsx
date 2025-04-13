@@ -52,7 +52,7 @@ const TokenSender: React.FC = () => {
           senderTokenAccount,
           recipientTokenAccount,
           publicKey,
-          Number(amount) * 10 ** 6, // Adjust for decimals
+          Number(amount) * 10 ** 6, 
           []
         )
       );

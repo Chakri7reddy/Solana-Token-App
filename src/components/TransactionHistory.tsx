@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { showError } from '../utils/notifications';
 
@@ -9,7 +9,8 @@ const TransactionHistory: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchTransactions = async () => {
+  // Memoize the fetchTransactions function with useCallback
+  const fetchTransactions = useCallback(async () => {
     if (!publicKey) return;
 
     setLoading(true);
@@ -41,11 +42,11 @@ const TransactionHistory: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [connection, publicKey]); // Add the dependencies here
 
   useEffect(() => {
     fetchTransactions();
-  }, [publicKey, connection]);
+  }, [fetchTransactions]); // Depend on fetchTransactions instead of recreating the function
 
   if (!publicKey) return <p className="info-text">🔌 Please connect your wallet.</p>;
 
