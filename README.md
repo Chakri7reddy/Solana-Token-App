@@ -86,5 +86,5 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 - Solana blockchain for providing the infrastructure for tokens.
 - Phantom and Solflare wallet integrations for seamless user interactions.
-```
+
 
