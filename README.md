@@ -1,49 +1,35 @@
-The Solana Token App is a frontend application designed to interact with the Solana blockchain through a user-friendly interface. It allows users to perform blockchain transactions, including wallet authentication, token creation, minting, and sending tokens. The app leverages Solana wallets (Phantom, Solflare) for smooth and responsive wallet integration, providing seamless blockchain interactions for token management.
+## Project Description: Solana Token App
 
-Key Features:
-Solana Wallet Integration:
+The **Solana Token App** is a frontend application designed to interact with the Solana blockchain through a user-friendly interface. It allows users to perform blockchain transactions, including wallet authentication, token creation, minting, and sending tokens. The app leverages Solana wallets (Phantom, Solflare) for smooth and responsive wallet integration, providing seamless blockchain interactions for token management.
 
-Connect and disconnect with Solana wallets (Phantom/Solflare).
+### Key Features:
+1. **Solana Wallet Integration**: 
+   - Connect and disconnect with Solana wallets (Phantom/Solflare).
+   - Display wallet address and balance for both SOL and custom tokens.
+   - Handle errors related to wallet connection.
 
-Display wallet address and balance for both SOL and custom tokens.
+2. **Token Creation & Minting**:
+   - Users can create and mint new tokens via the Solana SPL token program.
+   - Notifications for transaction success and failure.
 
-Handle errors related to wallet connection.
+3. **Token Transactions**:
+   - Send tokens to other addresses with confirmation and real-time feedback.
+   - View transaction history, including minted and transferred tokens.
 
-Token Creation & Minting:
+4. **UI/UX Design**:
+   - A responsive, mobile-friendly interface for easy navigation.
+   - Clear transaction status, loading states, and user notifications.
+   - Modern, minimalistic design ensuring intuitive interactions.
 
-Users can create and mint new tokens via the Solana SPL token program.
+5. **Blockchain Data Fetching**:
+   - Fetch and display real-time token and SOL balances.
+   - Track and display the history of transactions.
 
-Notifications for transaction success and failure.
-
-Token Transactions:
-
-Send tokens to other addresses with confirmation and real-time feedback.
-
-View transaction history, including minted and transferred tokens.
-
-UI/UX Design:
-
-A responsive, mobile-friendly interface for easy navigation.
-
-Clear transaction status, loading states, and user notifications.
-
-Modern, minimalistic design ensuring intuitive interactions.
-
-Blockchain Data Fetching:
-
-Fetch and display real-time token and SOL balances.
-
-Track and display the history of transactions.
-
-Technologies Used:
-Frontend: React.js
-
-Blockchain Interaction: Solana Web3.js
-
-Wallets: Phantom and Solflare wallet integration
-
-Deployment: Vercel/Netlify
-
+### Technologies Used:
+- **Frontend**: React.js
+- **Blockchain Interaction**: Solana Web3.js
+- **Wallets**: Phantom and Solflare wallet integration
+- **Deployment**: Vercel/Netlify
 
 ## Live Demo
 
